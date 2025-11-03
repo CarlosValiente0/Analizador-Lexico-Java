@@ -1,0 +1,5 @@
+umg\edu\gt\analizadorlexico\AnalizadorLexico.class
+umg\edu\gt\analizadorlexico\Token.class
+umg\edu\gt\analizadorlexico\AlgebraLexer.class
+umg\edu\gt\analizadorlexico\Main.class
+umg\edu\gt\analizadorlexico\TokenType.class

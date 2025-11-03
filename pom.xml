@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>umg.edu.gt</groupId>
+  <artifactId>AnalizadorLexico</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>24</maven.compiler.release>
+    <!-- Cambia si tu clase main tiene otro nombre/paquete -->
+    <exec.mainClass>umg.edu.gt.analizadorlexico.Main</exec.mainClass>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- JFlex: genera directamente a src/main/java -->
+      <plugin>
+        <groupId>de.jflex</groupId>
+        <artifactId>jflex-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <!-- Carpeta donde guardas .flex -->
+              <sourceDirectory>${project.basedir}/src/main/jflex</sourceDirectory>
+              <includes>
+                <!-- Cubre uno o varios .flex, incluso si están en subcarpetas -->
+                <include>**/*.flex</include>
+              </includes>
+              <!-- Generar el .java final aquí -->
+              <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Compilador -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Ejecutar la app con mvn exec:java (opcional) -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>${exec.mainClass}</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
